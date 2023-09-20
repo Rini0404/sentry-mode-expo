@@ -4,6 +4,7 @@ import { AppStackParamList, AppStackScreenProps } from '../navigators'
 import { remove } from '../utils/storage'
 import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
+import * as Sentry from 'sentry-expo'
 
 interface WelcomeScreenProps extends AppStackScreenProps<'Welcome'> {}
 
@@ -15,6 +16,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = () => {
     const clearToken = async () => {
         await remove('token')
         navigation.navigate('HomeScreen')
+        Sentry.Native.captureException('Test error from Rini')
     }
 
     return (
